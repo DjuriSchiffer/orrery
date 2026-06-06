@@ -6,8 +6,6 @@ import { HorizonArcView } from './HorizonArcView'
 
 export function WhereAreTheSunAndMoon() {
     const [mounted, setMounted] = useState(false)
-
-
     const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
     const [sunPos, setSunPos] = useState<{ azimuth: number; altitude: number } | null>(null)
 
@@ -71,61 +69,56 @@ export function WhereAreTheSunAndMoon() {
     const moonY = cy - moonR * Math.cos((moonAzimuthDeg * Math.PI) / 180)
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-[calc(100vh-2.5rem)] gap-6 p-8">
-            <h2 className="text-2xl font-semibold">Sun & Moon Position</h2>
+        <div className="min-h-[calc(100vh-2.5rem)] bg-gray-950 text-white flex flex-col items-center justify-center gap-8 p-8">
 
-            <div className="flex flex-col items-center gap-1 text-sm text-gray-500">
-                <p>{coords ? `${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` : 'waiting for location...'}</p>
-                <div className="flex flex-col items-center">
-                    <p className="text-sm text-gray-400">
-                        {currentDate.toLocaleDateString('en-NL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                    </p>
-                    <p className="text-4xl font-bold tabular-nums">
-                        {currentDate.toLocaleTimeString('en-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                    </p>
-                </div>
+            <div className="flex flex-col items-center gap-1">
+                <p className="text-xs text-gray-500">
+                    {coords ? `${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}` : 'waiting for location...'}
+                </p>
+                <p className="text-sm text-gray-400">
+                    {currentDate.toLocaleDateString('en-NL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </p>
+                <p className="text-5xl font-bold tabular-nums tracking-tight">
+                    {currentDate.toLocaleTimeString('en-NL', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                </p>
             </div>
 
             <div className="flex flex-col md:flex-row items-center gap-8 w-full max-w-3xl">
-
-                <svg
-                    viewBox={`0 0 ${size} ${size}`}
-                    className="w-full max-w-sm"
-                >
-                    <circle cx={cx} cy={cy} r={r + 40} fill="none" stroke="#555" strokeWidth="1" strokeDasharray="4 4" />
-                    <circle cx={cx} cy={cy} r={r} fill="none" stroke="#555" strokeWidth="1" />
-
-                    <text x={cx} y={cy - r - 16} textAnchor="middle" fill="currentColor" fontSize="14">N</text>
-                    <text x={cx} y={cy + r + 24} textAnchor="middle" fill="currentColor" fontSize="14">S</text>
-                    <text x={cx + r + 20} y={cy + 5} textAnchor="middle" fill="currentColor" fontSize="14">E</text>
-                    <text x={cx - r - 20} y={cy + 5} textAnchor="middle" fill="currentColor" fontSize="14">W</text>
-
+                <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-sm">
+                    <circle cx={cx} cy={cy} r={r + 40} fill="none" stroke="#374151" strokeWidth="1" strokeDasharray="4 4" />
+                    <circle cx={cx} cy={cy} r={r} fill="none" stroke="#374151" strokeWidth="1" />
+                    <text x={cx} y={cy - r - 16} textAnchor="middle" fill="#6b7280" fontSize="13">N</text>
+                    <text x={cx} y={cy + r + 24} textAnchor="middle" fill="#6b7280" fontSize="13">S</text>
+                    <text x={cx + r + 20} y={cy + 5} textAnchor="middle" fill="#6b7280" fontSize="13">E</text>
+                    <text x={cx - r - 20} y={cy + 5} textAnchor="middle" fill="#6b7280" fontSize="13">W</text>
                     {sunX !== null && sunY !== null && (
-                        <circle cx={sunX} cy={sunY} r={10} fill={isAboveHorizon ? '#facc15' : '#94a3b8'} />
+                        <circle cx={sunX} cy={sunY} r={10} fill={isAboveHorizon ? '#facc15' : '#374151'} />
                     )}
-
                     {coords && (
-                        <circle cx={moonX} cy={moonY} r={7} fill={moonIsAboveHorizon ? '#e2e8f0' : '#475569'} />
+                        <circle cx={moonX} cy={moonY} r={7} fill={moonIsAboveHorizon ? '#e2e8f0' : '#374151'} />
                     )}
-
-                    <circle cx={cx} cy={cy} r={4} fill="#888" />
+                    <circle cx={cx} cy={cy} r={4} fill="#4b5563" />
                 </svg>
                 <HorizonArcView coords={coords} />
             </div>
 
-            <div className="grid grid-cols-2 gap-6 text-sm w-full max-w-sm">
-                <div className="flex flex-col gap-1">
-                    <p className="font-medium">☀️ Sun</p>
-                    <p className="text-gray-500">Azimuth: {azimuthDeg?.toFixed(1)}°</p>
-                    <p className="text-gray-500">Altitude: {altitudeDeg?.toFixed(1)}°</p>
-                    <p className="text-gray-500">{isAboveHorizon ? 'Above horizon' : 'Below horizon'}</p>
+            <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+                <div className="flex flex-col gap-1 bg-gray-900 border border-gray-800 rounded px-4 py-3">
+                    <p className="text-xs font-medium text-gray-400">☀️ Sun</p>
+                    <p className="text-sm text-white">Azimuth: {azimuthDeg?.toFixed(1)}°</p>
+                    <p className="text-sm text-white">Altitude: {altitudeDeg?.toFixed(1)}°</p>
+                    <p className={`text-xs ${isAboveHorizon ? 'text-yellow-400' : 'text-gray-500'}`}>
+                        {isAboveHorizon ? 'Above horizon' : 'Below horizon'}
+                    </p>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <p className="font-medium">{moonPhaseEmoji[phaseIndex]} Moon</p>
-                    <p className="text-gray-500">Azimuth: {moonAzimuthDeg.toFixed(1)}°</p>
-                    <p className="text-gray-500">Altitude: {moonAltitudeDeg.toFixed(1)}°</p>
-                    <p className="text-gray-500">{moonIsAboveHorizon ? 'Above horizon' : 'Below horizon'}</p>
-                    <p className="text-gray-500">{(moonIllumination.fraction * 100).toFixed(0)}% illuminated</p>
+                <div className="flex flex-col gap-1 bg-gray-900 border border-gray-800 rounded px-4 py-3">
+                    <p className="text-xs font-medium text-gray-400">{moonPhaseEmoji[phaseIndex]} Moon</p>
+                    <p className="text-sm text-white">Azimuth: {moonAzimuthDeg.toFixed(1)}°</p>
+                    <p className="text-sm text-white">Altitude: {moonAltitudeDeg.toFixed(1)}°</p>
+                    <p className={`text-xs ${moonIsAboveHorizon ? 'text-slate-300' : 'text-gray-500'}`}>
+                        {moonIsAboveHorizon ? 'Above horizon' : 'Below horizon'}
+                    </p>
+                    <p className="text-xs text-gray-500">{(moonIllumination.fraction * 100).toFixed(0)}% illuminated</p>
                 </div>
             </div>
         </div>
