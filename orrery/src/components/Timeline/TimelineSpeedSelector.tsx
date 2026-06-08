@@ -4,8 +4,8 @@ import { useTimelineState, useTimelineDispatch } from '#/store/timeline'
 import type { TimelineSpeed } from '#/store/timeline'
 
 const SPEEDS: { value: TimelineSpeed; label: string }[] = [
-  { value: 'REAL_TIME', label: 'Real time' },
-  { value: 'ONE_SECOND', label: 'One second' },
+  { value: 'REAL_TIME', label: 'Smooth' },
+  { value: 'ONE_SECOND', label: 'Step' },
 ]
 
 export function TimelineSpeedSelector() {
