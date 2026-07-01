@@ -20,12 +20,12 @@ type Action =
   | { type: 'PAUSE_TIME' }
   | { type: 'INTERVAL_TIME' }
 
-function createInitialState(settings: TimelineSettings): TimelineState {
+function createInitialState(settings: TimelineSettings, granularity: Granularity = 'year'): TimelineState {
   return {
     time: 0,
     playing: 'pause',
     timelineSpeed: 'REAL_TIME',
-    granularity: 'minute',
+    granularity,
     timelineSettings: settings,
   }
 }
@@ -60,11 +60,13 @@ const DispatchContext = createContext<Dispatch<Action> | null>(null)
 export function TimelineProvider({
   children,
   settings,
+  defaultGranularity = 'year',
 }: {
   children: ReactNode
-  settings: TimelineSettings
+  settings: TimelineSettings,
+  defaultGranularity?: Granularity
 }) {
-  const [state, dispatch] = useReducer(timelineReducer, createInitialState(settings))
+  const [state, dispatch] = useReducer(timelineReducer, createInitialState(settings, defaultGranularity))
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>

@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhereAreTheSunAndMoonRouteImport } from './routes/where-are-the-sun-and-moon'
+import { Route as SolarSystemRouteImport } from './routes/solar-system'
 import { Route as IndexRouteImport } from './routes/index'
 
 const WhereAreTheSunAndMoonRoute = WhereAreTheSunAndMoonRouteImport.update({
   id: '/where-are-the-sun-and-moon',
   path: '/where-are-the-sun-and-moon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolarSystemRoute = SolarSystemRouteImport.update({
+  id: '/solar-system',
+  path: '/solar-system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/solar-system': typeof SolarSystemRoute
   '/where-are-the-sun-and-moon': typeof WhereAreTheSunAndMoonRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/solar-system': typeof SolarSystemRoute
   '/where-are-the-sun-and-moon': typeof WhereAreTheSunAndMoonRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/solar-system': typeof SolarSystemRoute
   '/where-are-the-sun-and-moon': typeof WhereAreTheSunAndMoonRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/where-are-the-sun-and-moon'
+  fullPaths: '/' | '/solar-system' | '/where-are-the-sun-and-moon'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/where-are-the-sun-and-moon'
-  id: '__root__' | '/' | '/where-are-the-sun-and-moon'
+  to: '/' | '/solar-system' | '/where-are-the-sun-and-moon'
+  id: '__root__' | '/' | '/solar-system' | '/where-are-the-sun-and-moon'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SolarSystemRoute: typeof SolarSystemRoute
   WhereAreTheSunAndMoonRoute: typeof WhereAreTheSunAndMoonRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/where-are-the-sun-and-moon'
       fullPath: '/where-are-the-sun-and-moon'
       preLoaderRoute: typeof WhereAreTheSunAndMoonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solar-system': {
+      id: '/solar-system'
+      path: '/solar-system'
+      fullPath: '/solar-system'
+      preLoaderRoute: typeof SolarSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SolarSystemRoute: SolarSystemRoute,
   WhereAreTheSunAndMoonRoute: WhereAreTheSunAndMoonRoute,
 }
 export const routeTree = rootRouteImport

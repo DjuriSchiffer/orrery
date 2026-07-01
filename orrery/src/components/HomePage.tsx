@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router"
 
 const experiments = [
     { path: '/where-are-the-sun-and-moon', label: 'Where are the sun and moon', description: 'Never lose them' },
+    { path: '/solar-system', label: 'Solar system', description: 'Yeah...' },
 ]
 
 export function HomePage() {

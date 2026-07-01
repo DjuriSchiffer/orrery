@@ -24,7 +24,7 @@ function SunAndMoonPage() {
     if (!settings) return null
 
     return (
-        <TimelineProvider settings={settings}>
+        <TimelineProvider settings={settings} defaultGranularity="minute">
             <WhereAreTheSunAndMoon />
             <Timeline markers={markers} />
         </TimelineProvider>
