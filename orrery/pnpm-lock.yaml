@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -34,11 +34,14 @@ dependencies:
     specifier: ^0.545.0
     version: 0.545.0(react@19.2.0)
   react:
-    specifier: ^19.2.0
+    specifier: 19.2.0
     version: 19.2.0
   react-dom:
-    specifier: ^19.2.0
+    specifier: 19.2.0
     version: 19.2.0(react@19.2.0)
+  suncalc:
+    specifier: ^1.9.0
+    version: 1.9.0
   tailwindcss:
     specifier: ^4.1.18
     version: 4.1.18
@@ -68,6 +71,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^19.2.0
     version: 19.2.0(@types/react@19.2.0)
+  '@types/suncalc':
+    specifier: ^1.9.2
+    version: 1.9.2
   '@vitejs/plugin-react':
     specifier: ^6.0.1
     version: 6.0.1(vite@8.0.0)
@@ -2162,6 +2168,10 @@ packages:
     dependencies:
       csstype: 3.2.3
 
+  /@types/suncalc@1.9.2:
+    resolution: {integrity: sha512-ATAGBHHfA1TlE2tjfidLyTcysjoT2JHHEAmWRULh73SU9UTn++j5fqHEW16X6Y/2Li87jEQXzgu4R/OOdlDqzw==}
+    dev: true
+
   /@typescript-eslint/eslint-plugin@8.60.1(@typescript-eslint/parser@8.60.1)(eslint@9.20.0)(typescript@6.0.2):
     resolution: {integrity: sha512-JQ4S5GB0tfjO8BuJ4fcX+HodkzJjYBV+7OJ+wLygaX7OGQ7FudyHL4NSCA6ob+w3Yn+5MkKIozOwQhXeM7opVg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -4138,6 +4148,10 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
     dev: true
+
+  /suncalc@1.9.0:
+    resolution: {integrity: sha512-vMJ8Byp1uIPoj+wb9c1AdK4jpkSKVAywgHX0lqY7zt6+EWRRC3Z+0Ucfjy/0yxTVO1hwwchZe4uoFNqrIC24+A==}
+    dev: false
 
   /supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
